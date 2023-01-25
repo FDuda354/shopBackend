@@ -32,6 +32,7 @@ public class AdminCategoryService {
         return adminCategoryRepo.save(adminCategory);
     }
 
+    //TODO: Optimize this
     public void deleteCategory(Long id) {
         List<AdminProduct> products = productRepo.findAllByCategoryId(id);
         products.forEach(product -> product.setCategoryId(1L));
