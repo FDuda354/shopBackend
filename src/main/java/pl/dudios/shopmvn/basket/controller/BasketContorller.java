@@ -8,6 +8,8 @@ import pl.dudios.shopmvn.basket.model.Basket;
 import pl.dudios.shopmvn.basket.model.dto.BasketProductDto;
 import pl.dudios.shopmvn.basket.service.BasketService;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/basket")
@@ -24,4 +26,10 @@ public class BasketContorller {
     public BasketSummaryDto addProductToBasket(@PathVariable Long id, @RequestBody BasketProductDto basketProductDto){
         return BasketMapper.mapToBasketSummaryDto(basketService.addProductToBasket(id,basketProductDto));
     }
+
+    @PutMapping("/{id}/update")
+    public BasketSummaryDto updateBasket(@PathVariable Long id, @RequestBody List<BasketProductDto> basketProductDtos){
+        return BasketMapper.mapToBasketSummaryDto(basketService.updateBasket(id,basketProductDtos));
+    }
+
 }

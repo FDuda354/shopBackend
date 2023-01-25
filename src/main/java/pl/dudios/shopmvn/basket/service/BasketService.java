@@ -13,6 +13,7 @@ import pl.dudios.shopmvn.common.model.Product;
 import pl.dudios.shopmvn.common.repository.ProductRepo;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -49,4 +50,18 @@ public class BasketService {
     private Product getProduct(Long productId) {
         return productRepo.findById(productId).orElseThrow();
     }
+
+    @Transactional
+    public Basket updateBasket(Long id, List<BasketProductDto> basketProductDtos) {
+        Basket basket = basketRepo.findById(id).orElseThrow();
+        basket.getItems().forEach(basketItem -> {
+            basketProductDtos.stream()
+                    .filter(basketProductDto -> basketProductDto.productId().equals(basketItem.getProduct().getId()))
+                    .findFirst()
+                    .ifPresent(basketProductDto -> basketItem.setQuantity(basketProductDto.quantity()));
+
+        });
+        return basket;
+    }
+
 }

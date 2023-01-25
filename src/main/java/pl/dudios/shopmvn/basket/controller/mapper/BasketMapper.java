@@ -60,13 +60,7 @@ public class BasketMapper {
     private static BigDecimal calculateTotalPrice(List<BasketItem> items) {
         return items.stream()
                 .map(BasketMapper::calculateLinePrice)
-                .reduce(BigDecimal::add)
-                .orElseThrow();
-
-        //TODO: Zamienic na to:
-//        return items.stream()
-//                .map(BasketMapper::calculateLinePrice)
-//                .reduce(BigDecimal.ZERO, BigDecimal::add);
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
     }
 
