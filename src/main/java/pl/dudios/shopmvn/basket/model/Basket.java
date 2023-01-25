@@ -25,6 +25,8 @@ public class Basket {
     @JoinColumn(name = "basketId")
     private List<BasketItem> items;
 
+    //TODO: Upgrade this 1
+
     public Basket addProduct(BasketItem item) {
         if (items == null) {
             items = new ArrayList<>();

@@ -13,6 +13,7 @@ import pl.dudios.shopmvn.common.model.Product;
 import pl.dudios.shopmvn.common.repository.ProductRepo;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,8 +23,9 @@ public class BasketService {
     private final BasketRepo basketRepo;
     private final ProductRepo productRepo;
 
+    //TODO: Upgrade this 1
     public Basket getBasket(Long id) {
-        return basketRepo.findById(id).orElseThrow();
+        return basketRepo.findById(id).orElse(Basket.builder().created(LocalDateTime.now()).items(new ArrayList<>()).build());
     }
 
 
@@ -37,14 +39,21 @@ public class BasketService {
                 .basketId(basket.getId())
                 .build());
     }
-
+    //TODO: Upgrade this 1
     private Basket getInitializedBasket(Long id) {
         if (id == null || id <= 0) {
             return basketRepo.save(Basket.builder()
                     .created(LocalDateTime.now())
                     .build());
         }
-        return basketRepo.findById(id).orElseThrow();
+        try {
+            return basketRepo.findById(id).orElseThrow();
+        } catch (Exception e) {
+            return basketRepo.save(Basket.builder()
+                    .created(LocalDateTime.now())
+                    .items(new ArrayList<>())
+                    .build());
+        }
     }
 
     private Product getProduct(Long productId) {
