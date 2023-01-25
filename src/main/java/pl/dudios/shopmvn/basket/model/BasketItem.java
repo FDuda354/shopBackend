@@ -1,7 +1,6 @@
 package pl.dudios.shopmvn.basket.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import pl.dudios.shopmvn.common.model.Product;
 
 import javax.persistence.*;
@@ -9,6 +8,9 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "basket_items")
 public class BasketItem {
 
@@ -16,7 +18,8 @@ public class BasketItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long quantity;
-
+    @OneToOne
     private Product product;
+    private Long basketId;
 
 }

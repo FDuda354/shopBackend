@@ -25,6 +25,7 @@ class ExistingFileRenameUtilsTest {
         assertEquals("test-1.png", newName);
     }
 
+
     @Test
     void shouldRenameManyFile(@TempDir Path tempDir) throws IOException {
         Files.createFile(tempDir.resolve("test.png"));

@@ -27,38 +27,37 @@ import static pl.dudios.shopmvn.admin.common.utils.SlugifyUtils.slugifySlug;
 @RestController
 @AllArgsConstructor
 @Validated
-@RequestMapping("/admin")
 public class AdminProductController {
     public static final Long EMPTY_ID = null;
     private final AdminProductService adminProductService;
     private final AdminProductImageService adminProductImageService;
 
-    @GetMapping("/products")
+    @GetMapping("/admin/products")
     public Page<AdminProduct> getProducts(Pageable pageable) {
         return adminProductService.getProducts(pageable);
     }
 
-    @GetMapping("/product/{id}")
+    @GetMapping("/admin/product/{id}")
     public AdminProduct getProduct(@PathVariable Long id) {
         return adminProductService.getProduct(id);
     }
 
-    @PostMapping("/product")
+    @PostMapping("/admin/product")
     public AdminProduct addProduct(@RequestBody @Valid AdminProductDto adminProductDto) {
         return adminProductService.addProduct(mapToAdminProduct(adminProductDto, EMPTY_ID));
     }
 
-    @PutMapping("/product/{id}")
+    @PutMapping("/admin/product/{id}")
     public AdminProduct updateProduct(@PathVariable Long id, @RequestBody @Valid AdminProductDto adminProductDto) {
         return adminProductService.updateProduct(mapToAdminProduct(adminProductDto, id));
     }
 
-    @DeleteMapping("/product/{id}")
+    @DeleteMapping("/admin/product/{id}")
     public void deleteProduct(@PathVariable Long id) {
         adminProductService.deleteProduct(id);
     }
 
-    @PostMapping("/product/upload-image")
+    @PostMapping("/admin/product/upload-image")
     public UploadResponse uploadImage(@RequestParam("file") MultipartFile file) {
         try {
             InputStream inputStream = file.getInputStream();
