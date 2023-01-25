@@ -6,4 +6,5 @@ import pl.dudios.shopmvn.basket.model.BasketItem;
 
 @Repository
 public interface BasketItemRepo extends JpaRepository<BasketItem, Long> {
+    Long countByBasketId(Long basketId);
 }

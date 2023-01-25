@@ -13,4 +13,8 @@ public class BasketItemService {
     public void deleteItemFromBasket(Long id){
         basketItemRepo.deleteById(id);
     }
+
+    public Long countItemInBasket(Long basketId) {
+        return basketItemRepo.countByBasketId(basketId);
+    }
 }
