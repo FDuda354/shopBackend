@@ -1,14 +1,12 @@
 package pl.dudios.shopmvn.basket.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.dudios.shopmvn.basket.model.Basket;
-import pl.dudios.shopmvn.basket.model.BasketItem;
+import pl.dudios.shopmvn.common.model.Basket;
+import pl.dudios.shopmvn.common.model.BasketItem;
 import pl.dudios.shopmvn.basket.model.dto.BasketProductDto;
-import pl.dudios.shopmvn.basket.repository.BasketRepo;
+import pl.dudios.shopmvn.common.repository.BasketRepo;
 import pl.dudios.shopmvn.common.model.Product;
 import pl.dudios.shopmvn.common.repository.ProductRepo;
 

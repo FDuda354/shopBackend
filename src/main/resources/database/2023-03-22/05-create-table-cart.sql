@@ -9,6 +9,6 @@ create table basket_items(
     product_id bigint not null,
     quantity int,
     basket_id bigint not null,
-    constraint fk_basket_item_product_id foreign key (product_id) references products(id),
-    constraint fk_basket_item_basket_id foreign key (basket_id) references baskets(id)
+    constraint fk_basket_items_product_id foreign key (product_id) references products(id),
+    constraint fk_basket_items_basket_id foreign key (basket_id) references baskets(id)
 );

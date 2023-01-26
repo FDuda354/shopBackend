@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.dudios.shopmvn.basket.controller.dto.BasketSummaryDto;
 import pl.dudios.shopmvn.basket.controller.mapper.BasketMapper;
-import pl.dudios.shopmvn.basket.model.Basket;
 import pl.dudios.shopmvn.basket.model.dto.BasketProductDto;
 import pl.dudios.shopmvn.basket.service.BasketService;
 

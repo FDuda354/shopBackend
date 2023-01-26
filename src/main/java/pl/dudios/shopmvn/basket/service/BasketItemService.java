@@ -2,7 +2,7 @@ package pl.dudios.shopmvn.basket.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.dudios.shopmvn.basket.repository.BasketItemRepo;
+import pl.dudios.shopmvn.common.repository.BasketItemRepo;
 
 @Service
 @AllArgsConstructor

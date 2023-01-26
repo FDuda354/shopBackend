@@ -1,4 +1,4 @@
-package pl.dudios.shopmvn.basket.model;
+package pl.dudios.shopmvn.common.model;
 
 import lombok.*;
 import pl.dudios.shopmvn.common.model.Product;

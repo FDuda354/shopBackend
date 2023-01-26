@@ -4,8 +4,8 @@ import pl.dudios.shopmvn.basket.controller.dto.BasketSummaryDto;
 import pl.dudios.shopmvn.basket.controller.dto.BasketSummaryItemDto;
 import pl.dudios.shopmvn.basket.controller.dto.ProductItemDto;
 import pl.dudios.shopmvn.basket.controller.dto.SummaryDto;
-import pl.dudios.shopmvn.basket.model.Basket;
-import pl.dudios.shopmvn.basket.model.BasketItem;
+import pl.dudios.shopmvn.common.model.Basket;
+import pl.dudios.shopmvn.common.model.BasketItem;
 import pl.dudios.shopmvn.common.model.Product;
 
 import java.math.BigDecimal;
