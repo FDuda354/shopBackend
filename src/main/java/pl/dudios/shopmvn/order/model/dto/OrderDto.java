@@ -25,4 +25,6 @@ public class OrderDto {
     private String phone;
     @NotBlank
     private Long basketId;
+    @NotBlank
+    private Long shipmentId;
 }

@@ -1,12 +1,10 @@
 package pl.dudios.shopmvn.order.model;
 
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,20 +12,18 @@ import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Getter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 
 @Entity
-@Table(name = "order_rows")
-public class OrderRow {
+@Table(name = "shipments")
+public class Shipment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long orderId;
-    private Long productId;
-    private Long quantity;
+    private String name;
     private BigDecimal price;
-    private Long shipmentId;
+    @Enumerated(EnumType.STRING)
+    private ShipmentType type;
+    private boolean defaultShipment;
+
 }
