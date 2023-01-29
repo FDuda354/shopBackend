@@ -2,7 +2,6 @@ package pl.dudios.shopmvn.basket.controller.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import pl.dudios.shopmvn.common.dto.ProductDto;
 
 import java.math.BigDecimal;
 

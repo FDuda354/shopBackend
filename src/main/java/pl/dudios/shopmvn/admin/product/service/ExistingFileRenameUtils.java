@@ -32,5 +32,4 @@ class ExistingFileRenameUtils {
         return split[0] + "-" + counter + "." + FilenameUtils.getExtension(fileName);
     }
 
-
 }

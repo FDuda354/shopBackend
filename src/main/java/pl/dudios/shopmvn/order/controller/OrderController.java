@@ -9,6 +9,7 @@ import pl.dudios.shopmvn.order.model.dto.InitOrder;
 import pl.dudios.shopmvn.order.model.dto.OrderDto;
 import pl.dudios.shopmvn.order.model.dto.OrderSummary;
 import pl.dudios.shopmvn.order.service.OrderService;
+import pl.dudios.shopmvn.order.service.PaymentService;
 import pl.dudios.shopmvn.order.service.ShipmentService;
 
 @RestController
@@ -16,6 +17,7 @@ import pl.dudios.shopmvn.order.service.ShipmentService;
 public class OrderController {
     private final OrderService orderService;
     private final ShipmentService shipmentService;
+    private final PaymentService paymentService;
 
     @PostMapping("/order")
     public OrderSummary createOrder(@RequestBody OrderDto orderDto) {
@@ -26,6 +28,7 @@ public class OrderController {
     public InitOrder initOrder() {
         return InitOrder.builder()
                 .shipments(shipmentService.getShipments())
+                .payments(paymentService.getPayments())
                 .build();
     }
 }

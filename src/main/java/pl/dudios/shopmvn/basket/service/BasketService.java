@@ -3,11 +3,11 @@ package pl.dudios.shopmvn.basket.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.dudios.shopmvn.basket.model.dto.BasketProductDto;
 import pl.dudios.shopmvn.common.model.Basket;
 import pl.dudios.shopmvn.common.model.BasketItem;
-import pl.dudios.shopmvn.basket.model.dto.BasketProductDto;
-import pl.dudios.shopmvn.common.repository.BasketRepo;
 import pl.dudios.shopmvn.common.model.Product;
+import pl.dudios.shopmvn.common.repository.BasketRepo;
 import pl.dudios.shopmvn.common.repository.ProductRepo;
 
 import java.time.LocalDateTime;
@@ -26,7 +26,6 @@ public class BasketService {
         return basketRepo.findById(id).orElse(Basket.builder().created(LocalDateTime.now()).items(new ArrayList<>()).build());
     }
 
-
     @Transactional
     public Basket addProductToBasket(Long id, BasketProductDto basketProductDto) {
         Basket basket = getInitializedBasket(id);
@@ -37,6 +36,7 @@ public class BasketService {
                 .basketId(basket.getId())
                 .build());
     }
+
     //TODO: Upgrade this 1
     private Basket getInitializedBasket(Long id) {
         if (id == null || id <= 0) {

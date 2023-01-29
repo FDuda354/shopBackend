@@ -12,7 +12,6 @@ import java.util.List;
 public interface BasketItemRepo extends JpaRepository<BasketItem, Long> {
     Long countByBasketId(Long basketId);
 
-
     @Query("DELETE FROM BasketItem bi WHERE bi.basketId in (:expiredBasketsIds)")
     @Modifying
     void deleteAllByBasketId(List<Long> expiredBasketsIds);
@@ -20,7 +19,5 @@ public interface BasketItemRepo extends JpaRepository<BasketItem, Long> {
     @Query("delete from BasketItem bi where bi.basketId=:basketId")
     @Modifying
     void deleteByBasketId(Long basketId);
-
-
 
 }

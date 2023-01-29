@@ -18,7 +18,6 @@ public interface BasketRepo extends JpaRepository<Basket, Long> {
     @Modifying
     void deleteAllByIdIn(List<Long> expiredBasketsIds);
 
-
     @Query("delete from Basket b where b.id=:id")
     @Modifying
     void deleteBasketById(Long id);

@@ -27,4 +27,6 @@ public class OrderDto {
     private Long basketId;
     @NotBlank
     private Long shipmentId;
+    @NotBlank
+    private Long paymentId;
 }

@@ -15,6 +15,7 @@ public class BasketMapper {
 
     private BasketMapper() {
     }
+
     public static BasketSummaryDto mapToBasketSummaryDto(Basket basket) {
         return BasketSummaryDto.builder()
                 .id(basket.getId())
@@ -48,9 +49,11 @@ public class BasketMapper {
                 .slug(product.getSlug())
                 .build();
     }
+
     private static BigDecimal calculateLinePrice(BasketItem item) {
         return item.getProduct().getPrice().multiply(BigDecimal.valueOf(item.getQuantity()));
     }
+
     private static SummaryDto mapToSummary(List<BasketItem> items) {
         return SummaryDto.builder()
                 .grossValue(calculateTotalPrice(items))
@@ -63,6 +66,5 @@ public class BasketMapper {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
     }
-
 
 }

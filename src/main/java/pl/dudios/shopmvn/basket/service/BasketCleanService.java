@@ -20,16 +20,15 @@ public class BasketCleanService {
     private final BasketRepo basketRepo;
     private final BasketItemRepo basketItemRepo;
 
-
     @Transactional
     @Scheduled(cron = "0 0 4 * * *")
     public void cleanOldBaskets() {
         List<Basket> baskets = basketRepo.findByCreatedLessThan(LocalDateTime.now().minusDays(2));
         List<Long> expiredBasketsIds = baskets.stream().map(Basket::getId).toList();
         log.info("Cleaning " + baskets.size() + " baskets");
-       if(!expiredBasketsIds.isEmpty()) {
-           basketItemRepo.deleteAllByBasketId(expiredBasketsIds);
-           basketRepo.deleteAllByIdIn(expiredBasketsIds);
-       }
+        if (!expiredBasketsIds.isEmpty()) {
+            basketItemRepo.deleteAllByBasketId(expiredBasketsIds);
+            basketRepo.deleteAllByIdIn(expiredBasketsIds);
+        }
     }
 }

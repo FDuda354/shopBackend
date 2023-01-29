@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.dudios.shopmvn.common.model.Product;
 import pl.dudios.shopmvn.common.repository.ProductRepo;
-import pl.dudios.shopmvn.review.repository.ReviewRepo;
 
 
 @Service
@@ -19,11 +18,9 @@ public class ProductService {
         return productRepo.findAll(pageable);
     }
 
-
     public Product getProductBySlug(String slug) {
         return productRepo.findBySlug(slug).orElseThrow();
 
     }
-
 
 }

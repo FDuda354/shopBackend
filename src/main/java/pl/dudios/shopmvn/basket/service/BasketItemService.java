@@ -10,7 +10,7 @@ public class BasketItemService {
 
     private final BasketItemRepo basketItemRepo;
 
-    public void deleteItemFromBasket(Long id){
+    public void deleteItemFromBasket(Long id) {
         basketItemRepo.deleteById(id);
     }
 
