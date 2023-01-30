@@ -1,6 +1,7 @@
 package pl.dudios.shopmvn.admin.order.model;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,8 +17,10 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
 @Getter
+@Setter
+
+@Entity
 @Table(name = "orders")
 public class AdminOrder {
     @Id
