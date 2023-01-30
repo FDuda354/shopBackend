@@ -14,4 +14,7 @@ public class EmailClientService {
     public EmailSender getSender(String senderName) {
         return senderMap.get(senderName);
     }
+    public EmailSender getSender() {
+        return senderMap.get("emailSimpleService");
+    }
 }
