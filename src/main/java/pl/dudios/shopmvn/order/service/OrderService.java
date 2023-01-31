@@ -53,7 +53,7 @@ public class OrderService {
     }
 
     private void sendConfirmEmail(Order newOrder) {
-        emailClientService.getSender("fakeEmailService")
+        emailClientService.getSender()
                 .sendEmail(newOrder.getEmail(), "Order confirmation", createEmailMessage(newOrder));
     }
 

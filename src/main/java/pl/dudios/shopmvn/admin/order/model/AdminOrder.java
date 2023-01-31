@@ -2,6 +2,7 @@ package pl.dudios.shopmvn.admin.order.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.dudios.shopmvn.admin.order.model.log.AdminOrderLog;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -42,4 +43,7 @@ public class AdminOrder {
     private String phone;
     @OneToOne
     private AdminPayment payment;
+    @OneToMany
+    @JoinColumn(name = "orderId")
+    private List<AdminOrderLog> logs;
 }
