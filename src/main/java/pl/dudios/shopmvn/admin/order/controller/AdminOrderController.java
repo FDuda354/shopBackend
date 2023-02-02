@@ -17,7 +17,6 @@ import pl.dudios.shopmvn.admin.order.model.dto.AdminOrderDto;
 import pl.dudios.shopmvn.admin.order.service.AdminOrderService;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -40,12 +39,12 @@ public class AdminOrderController {
     }
 
     @PatchMapping("/order/{id}")
-    public void updateOrderStatus(@PathVariable Long id, @RequestBody Map<String,String> values){
-         adminOrderService.updateOrderStatus(id, values);
+    public void updateOrderStatus(@PathVariable Long id, @RequestBody Map<String, String> values) {
+        adminOrderService.updateOrderStatus(id, values);
     }
 
     @GetMapping("/orders/initData")
-    public AdminInitDataDto getInitData(){
+    public AdminInitDataDto getInitData() {
         return new AdminInitDataDto(createOrderStatusMap());
     }
 

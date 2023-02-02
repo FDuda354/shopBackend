@@ -11,6 +11,7 @@ public class AdminOrderMapper {
 
     private AdminOrderMapper() {
     }
+
     public static Page<AdminOrderDto> mapToPageDtos(Page<AdminOrder> orders) {
         return new PageImpl<>(mapToDtoList(orders.getContent()), orders.getPageable(), orders.getTotalElements());
     }

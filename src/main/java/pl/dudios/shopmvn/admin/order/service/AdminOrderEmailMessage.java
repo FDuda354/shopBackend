@@ -20,14 +20,14 @@ public class AdminOrderEmailMessage {
     }
 
     public void notifyClient(AdminOrderStatus newStatus, AdminOrder order) {
-        if(newStatus == AdminOrderStatus.PROCESSING){
-            sendEmail(order.getEmail(), "Change your order status with ID: "+order.getId()+ "to" +newStatus.getValue(), createMessage(order, newStatus));
-        }else if(newStatus == AdminOrderStatus.WAITING_FOR_DELIVERY){
-            sendEmail(order.getEmail(), "Change your order status with ID: "+order.getId()+ "to" +newStatus.getValue(), createMessage(order, newStatus));
-        }else if(newStatus == AdminOrderStatus.COMPLETED){
-            sendEmail(order.getEmail(), "Change your order status with ID: "+order.getId()+ "to" +newStatus.getValue(), createMessage(order, newStatus));
-        }else if(newStatus == AdminOrderStatus.REFUND){
-            sendEmail(order.getEmail(), "Change your order status with ID: "+order.getId()+ "to" +newStatus.getValue(), createMessage(order, newStatus));
+        if (newStatus == AdminOrderStatus.PROCESSING) {
+            sendEmail(order.getEmail(), "Change your order status with ID: " + order.getId() + "to" + newStatus.getValue(), createMessage(order, newStatus));
+        } else if (newStatus == AdminOrderStatus.WAITING_FOR_DELIVERY) {
+            sendEmail(order.getEmail(), "Change your order status with ID: " + order.getId() + "to" + newStatus.getValue(), createMessage(order, newStatus));
+        } else if (newStatus == AdminOrderStatus.COMPLETED) {
+            sendEmail(order.getEmail(), "Change your order status with ID: " + order.getId() + "to" + newStatus.getValue(), createMessage(order, newStatus));
+        } else if (newStatus == AdminOrderStatus.REFUND) {
+            sendEmail(order.getEmail(), "Change your order status with ID: " + order.getId() + "to" + newStatus.getValue(), createMessage(order, newStatus));
         }
     }
 

@@ -18,6 +18,7 @@ import java.util.TreeMap;
 public class AdminOrderStatsService {
 
     private final AdminOrderRepo adminOrderRepo;
+
     public AdminOrderStats getOrdersStats() {
         LocalDateTime from = LocalDateTime.now().withDayOfMonth(1).withHour(0).withMinute(0).withSecond(0);
         LocalDateTime to = LocalDateTime.now();
@@ -27,7 +28,7 @@ public class AdminOrderStatsService {
                 AdminOrderStatus.COMPLETED
         );
 
-        Map<Integer,AdminOrderStatsValue> result = new TreeMap<>();
+        Map<Integer, AdminOrderStatsValue> result = new TreeMap<>();
 
         for (int i = from.getDayOfMonth(); i <= to.getDayOfMonth(); i++) {
             result.put(i, aggregateValue(i, orders));
@@ -43,12 +44,14 @@ public class AdminOrderStatsService {
     private AdminOrderStatsValue aggregateValue(int i, List<AdminOrder> orders) {
         BigDecimal[] result = orders.stream()
                 .filter(order -> order.getPlaceDate().getDayOfMonth() == i)
-                .map(order -> new BigDecimal[] {order.getGrossValue(), BigDecimal.ONE})
-                .reduce(new BigDecimal[] {BigDecimal.ZERO, BigDecimal.ZERO}, (a, b) -> new BigDecimal[] {a[0].add(b[0]), a[1].add(b[1])});
+                .map(order -> new BigDecimal[]{order.getGrossValue(), BigDecimal.ONE})
+                .reduce(new BigDecimal[]{BigDecimal.ZERO, BigDecimal.ZERO}, (a, b) -> new BigDecimal[]{a[0].add(b[0]), a[1].add(b[1])});
 
         return new AdminOrderStatsValue(result[0], result[1].longValue());
     }
-    private record AdminOrderStatsValue(BigDecimal sum, Long orderCount) {}
+
+    private record AdminOrderStatsValue(BigDecimal sum, Long orderCount) {
+    }
 
 
 }

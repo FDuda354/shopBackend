@@ -1,7 +1,6 @@
 package pl.dudios.shopmvn.admin.order.model.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 
 import java.util.Map;
@@ -10,5 +9,5 @@ import java.util.Map;
 @AllArgsConstructor
 public class AdminInitDataDto {
 
-    private Map<String,String> orderStatuses;
+    private Map<String, String> orderStatuses;
 }
