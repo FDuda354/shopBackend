@@ -20,8 +20,10 @@ public class UserService implements UserDetailsService {
     @Transactional
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AppUser appUser = userRepo.findByUsername(username)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        //System.out.println("====================================");
+      //  System.out.println("userId = " + userId);
+      //  AppUser appUser = userRepo.findByUsername(username).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        AppUser appUser = userRepo.findById(Long.parseLong(username)).orElseThrow(() -> new IllegalArgumentException("User not found"));
         AppUserDetails userDetails = new AppUserDetails(
                 appUser.getUsername(),
                 appUser.getPassword(),

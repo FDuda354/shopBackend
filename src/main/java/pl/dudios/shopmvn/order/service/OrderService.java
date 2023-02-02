@@ -1,6 +1,7 @@
 package pl.dudios.shopmvn.order.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.dudios.shopmvn.common.mail.EmailClientService;
@@ -38,11 +39,11 @@ public class OrderService {
     private final EmailClientService emailClientService;
 
     @Transactional
-    public OrderSummary createOrder(OrderDto orderDto) {
+    public OrderSummary createOrder(OrderDto orderDto, Long userId) {
         Basket basket = basketRepo.findById(orderDto.getBasketId()).orElseThrow();
         Shipment shipment = shipmentRepo.findById(orderDto.getShipmentId()).orElseThrow();
         Payment payment = paymentRepo.findById(orderDto.getPaymentId()).orElseThrow();
-        Order newOrder = orderRepo.save(createNewOrder(orderDto, basket, shipment, payment));
+        Order newOrder = orderRepo.save(createNewOrder(orderDto, basket, shipment, payment, userId));
 
         saveOrderRows(basket, newOrder.getId(), shipment);
         clearBasket(orderDto);

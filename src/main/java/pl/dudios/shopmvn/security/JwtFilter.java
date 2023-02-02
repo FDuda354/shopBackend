@@ -6,9 +6,9 @@ import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import pl.dudios.shopmvn.security.user.model.AppUserDetails;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -33,6 +33,8 @@ public class JwtFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws IOException, ServletException {
+
+
         UsernamePasswordAuthenticationToken authentication = getAuthentication(request);
         if (authentication == null) {
             filterChain.doFilter(request, response);
@@ -45,14 +47,17 @@ public class JwtFilter extends BasicAuthenticationFilter {
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
         String token = request.getHeader(TOKEN_HEADER);
         if (token != null && token.startsWith(TOKEN_PREFIX)) {
+
             String userName = JWT.require(Algorithm.HMAC256(secret))
                     .build()
                     .verify(token.replace(TOKEN_PREFIX, ""))
                     .getSubject();
+
             if (userName != null) {
-                UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
-                return new UsernamePasswordAuthenticationToken(userDetails.getUsername(), null, userDetails.getAuthorities());
+                AppUserDetails userDetails = (AppUserDetails) userDetailsService.loadUserByUsername(userName);
+                return new UsernamePasswordAuthenticationToken(userDetails.getId(), null, userDetails.getAuthorities());
             }
+
         }
         return null;
     }

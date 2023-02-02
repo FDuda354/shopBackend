@@ -16,7 +16,8 @@ import java.util.List;
 
 public class OrderMapper {
 
-    public static Order createNewOrder(OrderDto orderDto, Basket basket, Shipment shipment, Payment payment) {
+    public static Order createNewOrder(OrderDto orderDto, Basket basket, Shipment shipment, Payment payment,Long userIdFromToken) {
+        System.out.println("================createNewOrder w maperze==================" + userIdFromToken);
         return Order.builder()
                 .firstName(orderDto.getFirstName())
                 .lastName(orderDto.getLastName())
@@ -29,6 +30,7 @@ public class OrderMapper {
                 .orderStatus(OrderStatus.NEW)
                 .grossValue(calcGrossValue(basket.getItems(), shipment))
                 .payment(payment)
+                .userId(userIdFromToken)
                 .build();
     }
 

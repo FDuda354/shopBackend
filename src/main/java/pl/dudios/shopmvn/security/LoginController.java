@@ -65,9 +65,13 @@ public class LoginController {
     }
 
     private RoLResponse auth(String username, String password) {
-
+        System.out.println("===============username=====================");
+        System.out.println(username);
+        AppUser user = userRepo.findByUsername(username).orElseThrow();
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(username, password));
+                new UsernamePasswordAuthenticationToken(user.getId(), password));
+        System.out.println("===============authentication=====================");
+        System.out.println(authentication);
 
         AppUserDetails principal = (AppUserDetails) authentication.getPrincipal();
 
