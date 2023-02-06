@@ -3,9 +3,9 @@ package pl.dudios.shopmvn.admin.order.stats.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.dudios.shopmvn.admin.order.model.AdminOrder;
-import pl.dudios.shopmvn.admin.order.model.AdminOrderStatus;
 import pl.dudios.shopmvn.admin.order.repository.AdminOrderRepo;
 import pl.dudios.shopmvn.admin.order.stats.model.AdminOrderStats;
+import pl.dudios.shopmvn.common.model.OrderStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -25,7 +25,7 @@ public class AdminOrderStatsService {
         List<AdminOrder> orders = adminOrderRepo.findAllByPlaceDateIsBetweenAndOrderStatus(
                 from,
                 to,
-                AdminOrderStatus.COMPLETED
+                OrderStatus.COMPLETED
         );
 
         Map<Integer, AdminOrderStatsValue> result = new TreeMap<>();

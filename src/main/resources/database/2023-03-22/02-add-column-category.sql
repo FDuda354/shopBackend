@@ -1,5 +1,5 @@
 --liquibase formatted sql
 --changeset FDuda:5
-alter table products add category_id bigint after category;
-alter table products drop column category;
-alter table products add constraint fk_products_category_id foreign key (category_id) references categories(id);
+ALTER TABLE products ADD COLUMN category_id bigint;
+ALTER TABLE products DROP COLUMN category;
+ALTER TABLE products ADD CONSTRAINT fk_products_category_id FOREIGN KEY (category_id) REFERENCES categories(id);

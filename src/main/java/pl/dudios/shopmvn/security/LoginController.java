@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -65,13 +64,9 @@ public class LoginController {
     }
 
     private RoLResponse auth(String username, String password) {
-        System.out.println("===============username=====================");
-        System.out.println(username);
         AppUser user = userRepo.findByUsername(username).orElseThrow();
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getId(), password));
-        System.out.println("===============authentication=====================");
-        System.out.println(authentication);
 
         AppUserDetails principal = (AppUserDetails) authentication.getPrincipal();
 
@@ -80,16 +75,20 @@ public class LoginController {
                 .withExpiresAt(new Date(System.currentTimeMillis() + expirationTime))
                 .sign(Algorithm.HMAC256(secret.getBytes()));
 
+
         return new RoLResponse(token, principal.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals(Role.ROLE_ADMIN.name())));
 
     }
+
     private record RoLResponse(String token, boolean isAdmin) {
     }
+
     private record LoginCredentials(@NotBlank String username,
                                     @NotBlank String password) {
 
     }
+
     private record RegisterCredentials(@Email String username,
                                        @NotBlank String password,
                                        @NotBlank String confirmPassword) {

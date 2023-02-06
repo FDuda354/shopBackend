@@ -2,12 +2,13 @@ package pl.dudios.shopmvn.order.service.mapper;
 
 import pl.dudios.shopmvn.common.model.Basket;
 import pl.dudios.shopmvn.common.model.BasketItem;
+import pl.dudios.shopmvn.common.model.OrderStatus;
 import pl.dudios.shopmvn.order.model.Order;
 import pl.dudios.shopmvn.order.model.OrderRow;
-import pl.dudios.shopmvn.order.model.OrderStatus;
 import pl.dudios.shopmvn.order.model.Payment;
 import pl.dudios.shopmvn.order.model.Shipment;
 import pl.dudios.shopmvn.order.model.dto.OrderDto;
+import pl.dudios.shopmvn.order.model.dto.OrderDtoForUser;
 import pl.dudios.shopmvn.order.model.dto.OrderSummary;
 
 import java.math.BigDecimal;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class OrderMapper {
 
-    public static Order createNewOrder(OrderDto orderDto, Basket basket, Shipment shipment, Payment payment,Long userIdFromToken) {
+    public static Order createNewOrder(OrderDto orderDto, Basket basket, Shipment shipment, Payment payment, Long userIdFromToken) {
         System.out.println("================createNewOrder w maperze==================" + userIdFromToken);
         return Order.builder()
                 .firstName(orderDto.getFirstName())
@@ -67,5 +68,16 @@ public class OrderMapper {
                 .price(item.getProduct().getPrice())
                 .quantity(item.getQuantity())
                 .build();
+    }
+
+    public static List<OrderDtoForUser> createOrderListDtoForUser(List<Order> orders) {
+        return orders.stream()
+                .map(order -> new OrderDtoForUser(
+                        order.getId(),
+                        order.getPlaceDate(),
+                        order.getOrderStatus().getValue(),
+                        order.getGrossValue(),
+                        order.getPayment().getName()))
+                .toList();
     }
 }

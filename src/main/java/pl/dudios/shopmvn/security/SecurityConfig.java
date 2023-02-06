@@ -9,11 +9,8 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import pl.dudios.shopmvn.security.user.model.Role;
-
-import javax.sql.DataSource;
 
 @Configuration
 public class SecurityConfig {
@@ -33,6 +30,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(auth -> auth
                 .antMatchers("/admin/**").hasRole(Role.ROLE_ADMIN.getName())
+                .antMatchers(HttpMethod.GET, "/orders").authenticated()
                 .anyRequest().permitAll()
         );
 

@@ -1,5 +1,5 @@
 --liquibase formatted sql
 --changeset FDuda:6
-insert into categories (id, name, description, slug) values(1, 'Inne', '', 'inne');
-update products set category_id=1;
-alter table products MODIFY category_id bigint not null;
+INSERT INTO categories (id, name, description, slug) VALUES (1, 'Inne', '', 'inne');
+UPDATE products SET category_id = 1;
+ALTER TABLE products ALTER COLUMN category_id SET NOT NULL;

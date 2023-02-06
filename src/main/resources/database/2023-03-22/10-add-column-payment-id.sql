@@ -1,5 +1,5 @@
 --liquibase formatted sql
 --changeset FDuda:13
-alter table orders add column payment_id bigint;
-update orders set payment_id = 1;
-alter table orders MODIFY payment_id bigint NOT NULL;
+ALTER TABLE orders ADD COLUMN payment_id bigint;
+UPDATE orders SET payment_id = 1;
+ALTER TABLE orders ALTER COLUMN payment_id SET NOT NULL;

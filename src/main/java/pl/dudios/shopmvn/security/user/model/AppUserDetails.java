@@ -12,6 +12,7 @@ import java.util.Collection;
 public class AppUserDetails extends User {
 
     private Long id;
+
     public AppUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
     }

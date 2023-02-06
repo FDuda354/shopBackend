@@ -3,8 +3,8 @@ package pl.dudios.shopmvn.admin.order.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.dudios.shopmvn.admin.order.model.AdminOrder;
-import pl.dudios.shopmvn.admin.order.model.AdminOrderStatus;
 import pl.dudios.shopmvn.common.mail.EmailClientService;
+import pl.dudios.shopmvn.common.model.OrderStatus;
 
 
 @Service
@@ -13,20 +13,20 @@ public class AdminOrderEmailMessage {
 
     private final EmailClientService emailClientService;
 
-    public static String createMessage(AdminOrder order, AdminOrderStatus newStatus) {
+    public static String createMessage(AdminOrder order, OrderStatus newStatus) {
         return "Hi " + order.getFirstName() + " " + order.getLastName() + ","
                 + "Your order " + order.getId() + " has been " + newStatus.name().toLowerCase() + "."
                 + "Greetings";
     }
 
-    public void notifyClient(AdminOrderStatus newStatus, AdminOrder order) {
-        if (newStatus == AdminOrderStatus.PROCESSING) {
+    public void notifyClient(OrderStatus newStatus, AdminOrder order) {
+        if (newStatus == OrderStatus.PROCESSING) {
             sendEmail(order.getEmail(), "Change your order status with ID: " + order.getId() + "to" + newStatus.getValue(), createMessage(order, newStatus));
-        } else if (newStatus == AdminOrderStatus.WAITING_FOR_DELIVERY) {
+        } else if (newStatus == OrderStatus.WAITING_FOR_DELIVERY) {
             sendEmail(order.getEmail(), "Change your order status with ID: " + order.getId() + "to" + newStatus.getValue(), createMessage(order, newStatus));
-        } else if (newStatus == AdminOrderStatus.COMPLETED) {
+        } else if (newStatus == OrderStatus.COMPLETED) {
             sendEmail(order.getEmail(), "Change your order status with ID: " + order.getId() + "to" + newStatus.getValue(), createMessage(order, newStatus));
-        } else if (newStatus == AdminOrderStatus.REFUND) {
+        } else if (newStatus == OrderStatus.REFUND) {
             sendEmail(order.getEmail(), "Change your order status with ID: " + order.getId() + "to" + newStatus.getValue(), createMessage(order, newStatus));
         }
     }

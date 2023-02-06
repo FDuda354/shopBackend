@@ -1,20 +1,21 @@
 --liquibase formatted sql
 --changeset FDuda:15
-create table users(
-    id bigint not null auto_increment PRIMARY KEY,
-    username varchar(50) not null unique,
-    password varchar(500) not null,
-    enabled boolean not null
+CREATE TABLE users (
+id serial PRIMARY KEY,
+username varchar(50) NOT NULL UNIQUE,
+password varchar(500) NOT NULL,
+enabled boolean NOT NULL
 );
 --changeset FDuda:16
-create table authorities (
-    username varchar(50) not null,
-    authority varchar(50) not null,
-    constraint fk_authorities_users foreign key(username) references users(username)
+CREATE TABLE authorities (
+username varchar(50) NOT NULL,
+authority varchar(50) NOT NULL,
+CONSTRAINT fk_authorities_users FOREIGN KEY (username) REFERENCES users (username)
 );
 --changeset FDuda:17
-create unique index ix_auth_username on authorities (username,authority);
+CREATE UNIQUE INDEX ix_auth_username ON authorities (username, authority);
 --changeset FDuda:18
-insert into users (id, username, password, enabled)
-values (1, 'admin', '{bcrypt}$2a$10$upzXFsFUOClFRR69OMKF8eajGMRs0vhcSHqvNDKy9yfW45w7o9z6O', true);
-insert into authorities (username, authority) values ('admin','ROLE_ADMIN');
+INSERT INTO users (id, username, password, enabled)
+VALUES (1, 'admin', '{bcrypt}$2a$10$upzXFsFUOClFRR69OMKF8eajGMRs0vhcSHqvNDKy9yfW45w7o9z6O', true);
+INSERT INTO authorities (username, authority)
+VALUES ('admin', 'ROLE_ADMIN');

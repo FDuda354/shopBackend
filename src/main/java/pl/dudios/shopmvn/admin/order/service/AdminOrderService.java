@@ -8,10 +8,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.dudios.shopmvn.admin.order.model.AdminOrder;
-import pl.dudios.shopmvn.admin.order.model.AdminOrderStatus;
 import pl.dudios.shopmvn.admin.order.model.log.AdminOrderLog;
 import pl.dudios.shopmvn.admin.order.repository.AdminOrderLogRepo;
 import pl.dudios.shopmvn.admin.order.repository.AdminOrderRepo;
+import pl.dudios.shopmvn.common.model.OrderStatus;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -48,12 +48,20 @@ public class AdminOrderService {
     private void changeOrderStatus(AdminOrder order, Map<String, String> values) {
         if (values.containsKey("orderStatus")) {
 
-            AdminOrderStatus oldStatus = order.getOrderStatus();
-            AdminOrderStatus newStatus = AdminOrderStatus.valueOf(values.get("orderStatus"));
-            if (oldStatus != newStatus)
+            OrderStatus oldStatus = order.getOrderStatus();
+            OrderStatus newStatus = OrderStatus.valueOf(values.get("orderStatus"));
+            System.out.println("====================================");
+            System.out.println("oldStatus = " + oldStatus);
+            System.out.println("newStatus = " + newStatus);
+            System.out.println("===================order=================");
+
+            System.out.println(order);
+            if (oldStatus == newStatus)
                 return;
 
             order.setOrderStatus(newStatus);
+            System.out.println("===================save=================");
+            adminOrderRepo.save(order);
 
             logStatusChange(order.getId(), oldStatus, newStatus);
             adminOrderEmailMessage.notifyClient(newStatus, order);
@@ -62,7 +70,7 @@ public class AdminOrderService {
     }
 
 
-    private void logStatusChange(Long orderId, AdminOrderStatus oldStatus, AdminOrderStatus newStatus) {
+    private void logStatusChange(Long orderId, OrderStatus oldStatus, OrderStatus newStatus) {
         adminOrderLogRepo.save(
                 AdminOrderLog.builder()
                         .created(LocalDateTime.now())

@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pl.dudios.shopmvn.order.model.OrderStatus;
+import pl.dudios.shopmvn.common.model.OrderStatus;
 import pl.dudios.shopmvn.order.model.Payment;
 
 import javax.persistence.EnumType;

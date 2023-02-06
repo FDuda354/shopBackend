@@ -1,14 +1,14 @@
 --liquibase formatted sql
 --changeset FDuda:8
-create table baskets(
-    id bigint not null auto_increment PRIMARY KEY,
-    created datetime not null
+CREATE TABLE baskets (
+  id serial PRIMARY KEY,
+  created timestamp NOT NULL
 );
-create table basket_items(
-    id bigint not null auto_increment PRIMARY KEY,
-    product_id bigint not null,
-    quantity int,
-    basket_id bigint not null,
-    constraint fk_basket_items_product_id foreign key (product_id) references products(id),
-    constraint fk_basket_items_basket_id foreign key (basket_id) references baskets(id)
+CREATE TABLE basket_items (
+  id serial PRIMARY KEY,
+  product_id bigint NOT NULL,
+  quantity int,
+  basket_id bigint NOT NULL,
+  CONSTRAINT fk_basket_items_product_id FOREIGN KEY (product_id) REFERENCES products(id),
+  CONSTRAINT fk_basket_items_basket_id FOREIGN KEY (basket_id) REFERENCES baskets(id)
 );

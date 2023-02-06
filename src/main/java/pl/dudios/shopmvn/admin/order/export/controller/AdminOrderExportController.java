@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.dudios.shopmvn.admin.order.export.service.AdminOrderExportService;
 import pl.dudios.shopmvn.admin.order.model.AdminOrder;
-import pl.dudios.shopmvn.admin.order.model.AdminOrderStatus;
+import pl.dudios.shopmvn.common.model.OrderStatus;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -43,7 +43,7 @@ public class AdminOrderExportController {
     public ResponseEntity<Resource> exportOrders(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate from,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate to,
-            @RequestParam AdminOrderStatus orderStatus
+            @RequestParam OrderStatus orderStatus
     ) {
         List<AdminOrder> adminOrders = adminOrderExportService.exportOrders(
                 LocalDateTime.of(from, LocalTime.of(0, 0, 0)),

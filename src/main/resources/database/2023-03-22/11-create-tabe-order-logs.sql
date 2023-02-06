@@ -1,8 +1,8 @@
 --liquibase formatted sql
 --changeset FDuda:14
-create table order_logs(
-    id bigint not null auto_increment PRIMARY KEY,
-    order_id bigint not null,
-    created datetime not null,
-    note text
+CREATE TABLE order_logs (
+id serial PRIMARY KEY,
+order_id bigint NOT NULL,
+created timestamptz NOT NULL,
+note text
 );

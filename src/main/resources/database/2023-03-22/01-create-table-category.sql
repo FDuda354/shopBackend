@@ -1,8 +1,8 @@
 --liquibase formatted sql
 --changeset FDuda:4
-create table categories(
-    id bigint not null auto_increment PRIMARY KEY,
-    name varchar(255) not null,
+CREATE TABLE categories (
+    id serial PRIMARY KEY,
+    name varchar(255) NOT NULL,
     description text,
-    slug varchar(255) not null
+    slug varchar(255) NOT NULL
 );

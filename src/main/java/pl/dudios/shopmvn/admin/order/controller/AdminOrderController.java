@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.dudios.shopmvn.admin.order.controller.mapper.AdminOrderMapper;
 import pl.dudios.shopmvn.admin.order.model.AdminOrder;
-import pl.dudios.shopmvn.admin.order.model.AdminOrderStatus;
 import pl.dudios.shopmvn.admin.order.model.dto.AdminInitDataDto;
 import pl.dudios.shopmvn.admin.order.model.dto.AdminOrderDto;
 import pl.dudios.shopmvn.admin.order.service.AdminOrderService;
+import pl.dudios.shopmvn.common.model.OrderStatus;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -49,7 +49,7 @@ public class AdminOrderController {
     }
 
     private Map<String, String> createOrderStatusMap() {
-        return Arrays.stream(AdminOrderStatus.values())
-                .collect(Collectors.toMap(AdminOrderStatus::name, AdminOrderStatus::getValue));
+        return Arrays.stream(OrderStatus.values())
+                .collect(Collectors.toMap(OrderStatus::name, OrderStatus::getValue));
     }
 }

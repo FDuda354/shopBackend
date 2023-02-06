@@ -2,7 +2,7 @@ package pl.dudios.shopmvn.admin.order.model.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import pl.dudios.shopmvn.admin.order.model.AdminOrderStatus;
+import pl.dudios.shopmvn.common.model.OrderStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -12,6 +12,6 @@ import java.time.LocalDateTime;
 public class AdminOrderDto {
     private Long id;
     private LocalDateTime placeDate;
-    private AdminOrderStatus orderStatus;
+    private OrderStatus orderStatus;
     private BigDecimal grossValue;
 }

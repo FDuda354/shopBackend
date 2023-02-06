@@ -1,6 +1,6 @@
 --liquibase formatted sql
 --changeset FDuda:2
-INSERT INTO products(name,category,description,full_description,price,currency,slug)
+INSERT INTO products(name, category, description, full_description, price, currency, slug)
 VALUES
 ('Produkt 1', 'kategoria 1', 'Opis 1', 'Longopis 1', 10.99, 'PLN', 'product-1'),
 ('Produkt 2', 'kategoria 2', 'Opis 2', null, 10.99, 'PLN', 'product-2'),

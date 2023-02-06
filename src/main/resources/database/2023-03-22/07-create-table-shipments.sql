@@ -1,11 +1,11 @@
 --liquibase formatted sql
 --changeset FDuda:10
-create table shipments(
-    id bigint not null auto_increment PRIMARY KEY,
-    name varchar(64) not null,
-    price decimal(6,2) not null,
-    type varchar(32) not null,
-    default_shipment boolean default false
+CREATE TABLE shipments (
+  id serial PRIMARY KEY,
+  name varchar(64) NOT NULL,
+  price numeric(6,2) NOT NULL,
+  type varchar(32) NOT NULL,
+  default_shipment boolean DEFAULT false
 );
-insert into shipments(name, price, type, default_shipment) values ('Courier', 14.99, 'COURIER', true);
-insert into shipments(name, price, type, default_shipment) values ('Pick up', 0.0, 'PICKUP', false);
+INSERT INTO shipments(name, price, type, default_shipment) VALUES ('Courier', 14.99, 'COURIER', true);
+INSERT INTO shipments(name, price, type, default_shipment) VALUES ('Pick up', 0.0, 'PICKUP', false);

@@ -1,7 +1,6 @@
 package pl.dudios.shopmvn.order.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.dudios.shopmvn.common.mail.EmailClientService;
@@ -13,6 +12,7 @@ import pl.dudios.shopmvn.order.model.OrderRow;
 import pl.dudios.shopmvn.order.model.Payment;
 import pl.dudios.shopmvn.order.model.Shipment;
 import pl.dudios.shopmvn.order.model.dto.OrderDto;
+import pl.dudios.shopmvn.order.model.dto.OrderDtoForUser;
 import pl.dudios.shopmvn.order.model.dto.OrderSummary;
 import pl.dudios.shopmvn.order.repositroy.OrderRepo;
 import pl.dudios.shopmvn.order.repositroy.OrderRowRepo;
@@ -23,6 +23,7 @@ import java.util.List;
 
 import static pl.dudios.shopmvn.order.service.mapper.OrderEmailMessageMapper.createEmailMessage;
 import static pl.dudios.shopmvn.order.service.mapper.OrderMapper.createNewOrder;
+import static pl.dudios.shopmvn.order.service.mapper.OrderMapper.createOrderListDtoForUser;
 import static pl.dudios.shopmvn.order.service.mapper.OrderMapper.createOrderSummary;
 import static pl.dudios.shopmvn.order.service.mapper.OrderMapper.mapToOrderRow;
 import static pl.dudios.shopmvn.order.service.mapper.OrderMapper.mapToOrderRowWithQuantity;
@@ -78,6 +79,10 @@ public class OrderService {
                 .map(item -> mapToOrderRowWithQuantity(orderId, item))
                 .peek(orderRowRepo::save)
                 .toList();
+    }
+
+    public List<OrderDtoForUser> getOrdersFromUser(Long userId) {
+        return createOrderListDtoForUser(orderRepo.findAllByUserId(userId));
     }
 
 }

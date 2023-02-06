@@ -1,6 +1,6 @@
-package pl.dudios.shopmvn.admin.order.model;
+package pl.dudios.shopmvn.common.model;
 
-public enum AdminOrderStatus {
+public enum OrderStatus {
     NEW("NEW"),
     PAID("PAID"),
     PROCESSING("PROCESSING"),
@@ -11,7 +11,7 @@ public enum AdminOrderStatus {
 
     private String value;
 
-    AdminOrderStatus(String value) {
+    OrderStatus(String value) {
         this.value = value;
     }
 
