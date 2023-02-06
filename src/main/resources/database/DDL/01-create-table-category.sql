@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset FDuda:4
+--changeset FDuda:1
 CREATE TABLE categories (
     id serial PRIMARY KEY,
     name varchar(255) NOT NULL,

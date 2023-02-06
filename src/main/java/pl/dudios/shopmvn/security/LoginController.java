@@ -75,7 +75,6 @@ public class LoginController {
                 .withExpiresAt(new Date(System.currentTimeMillis() + expirationTime))
                 .sign(Algorithm.HMAC256(secret.getBytes()));
 
-
         return new RoLResponse(token, principal.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals(Role.ROLE_ADMIN.name())));
 

@@ -41,6 +41,7 @@ public class OrderController {
         if(userId == null){
             throw new IllegalArgumentException("NULL user in getOrders");
         }
+        System.out.println(orderService.getOrdersFromUser(userId));
         return orderService.getOrdersFromUser(userId);
     }
 }
