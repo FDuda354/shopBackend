@@ -69,7 +69,18 @@ public class AdminProductController {
         try {
             InputStream inputStream = file.getInputStream();
             String savedFileName = adminProductImageService.uploadImage(file.getOriginalFilename(), inputStream);
-            System.out.println(savedFileName);
+            return new UploadResponse(savedFileName);
+        } catch (IOException e) {
+            throw new RuntimeException("Error while saving file " + e.getMessage());
+        }
+
+    }
+
+    @PostMapping("/profile/upload-image")
+    public UploadResponse uploadProfileImage(@RequestParam("file") MultipartFile file) {
+        try {
+            InputStream inputStream = file.getInputStream();
+            String savedFileName = adminProductImageService.uploadImage(file.getOriginalFilename(), inputStream);
             return new UploadResponse(savedFileName);
         } catch (IOException e) {
             throw new RuntimeException("Error while saving file " + e.getMessage());

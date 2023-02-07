@@ -58,13 +58,13 @@ public class LostPasswordService {
     }
 
     @Transactional
-    public void changePassword(ChangePassword changePassword){
-        if(!Objects.equals(changePassword.password(), changePassword.repeatPassword())) {
+    public void changePassword(ChangePassword changePassword) {
+        if (!Objects.equals(changePassword.password(), changePassword.repeatPassword())) {
             throw new RuntimeException("Hasła nie są takie same");
         }
         AppUser user = userRepo.findByHash(changePassword.hash())
                 .orElseThrow(() -> new RuntimeException("Invalid link"));
-        if(user.getHashDate().plusMinutes(10).isAfter(LocalDateTime.now())){
+        if (user.getHashDate().plusMinutes(10).isAfter(LocalDateTime.now())) {
             user.setPassword("{bcrypt}" + new BCryptPasswordEncoder().encode(changePassword.password()));
             user.setHash(null);
             user.setHashDate(null);

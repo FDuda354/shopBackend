@@ -13,10 +13,12 @@ import pl.dudios.shopmvn.security.user.service.LostPasswordService;
 public class LostPasswordController {
 
     private final LostPasswordService lostPasswordService;
+
     @PostMapping("/lostPassword")
     public void lostPassword(@RequestBody EmailObject email) {
         lostPasswordService.sendLostPasswordLink(email);
     }
+
     @PostMapping("/changePassword")
     public void changePassword(@RequestBody ChangePassword changePassword) {
         lostPasswordService.changePassword(changePassword);

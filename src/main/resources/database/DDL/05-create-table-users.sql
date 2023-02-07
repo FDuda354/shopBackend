@@ -5,6 +5,7 @@ id serial PRIMARY KEY,
 username varchar(50) NOT NULL UNIQUE,
 password varchar(500) NOT NULL,
 enabled boolean NOT NULL,
+image varchar(255),
 hash VARCHAR(120),
 hash_date TIMESTAMP
 );

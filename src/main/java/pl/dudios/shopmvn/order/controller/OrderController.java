@@ -38,7 +38,7 @@ public class OrderController {
 
     @GetMapping("/orders")
     public List<OrderDtoForUser> getOrders(@AuthenticationPrincipal Long userId) {
-        if(userId == null){
+        if (userId == null) {
             throw new IllegalArgumentException("NULL user in getOrders");
         }
         System.out.println(orderService.getOrdersFromUser(userId));
