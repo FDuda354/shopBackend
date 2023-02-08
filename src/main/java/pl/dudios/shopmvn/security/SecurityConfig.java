@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import pl.dudios.shopmvn.security.user.model.Role;
 
 @Configuration
@@ -44,6 +46,21 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
+    }
+
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("http://54.37.137.7:7082","https://54.37.137.7:7082", "http://shop.dudios.pl","https://shop.dudios.pl")
+                        .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE")
+                        .allowedHeaders("*")
+                        .exposedHeaders("Access-Control-Allow-Origin");
+            }
+        };
     }
 
 }

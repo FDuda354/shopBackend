@@ -18,44 +18,22 @@ public class AdminProductImageService {
 
     @Value("${app.uploadDir}")
     private String UPLOAD_DIR;
-    //  private String UPLOAD_DIR = "./data/productImages/";
+     // private String UPLOAD_DIR = "./data/productImages/";
 
     public String uploadImage(String fileName, InputStream inputStream) {
-        Path uploadPath = Paths.get(UPLOAD_DIR);
-        if (!Files.exists(uploadPath)) {
-            try {
-                Files.createDirectories(uploadPath);
-            } catch (IOException e) {
-                throw new RuntimeException("Cant createDirectories siema pawel", e);
-            }
-        }
-
-            System.out.println("!Files.exists(uploadPath)");
-            System.out.println(!Files.exists(uploadPath));
         String newFileName = SlugifyUtils.slugifyFileName(fileName);
         newFileName = ExistingFileRenameUtils.renameFileIfExists(Path.of("/opt/app"+UPLOAD_DIR), newFileName);
-        System.out.println("newFileName :" + newFileName);
         Path filePath = Paths.get("/opt/app"+UPLOAD_DIR).resolve(newFileName);
-        System.out.println("File path: " + filePath.toString());
-        if (Files.exists(filePath)) {
-            System.out.println("File successfully uploaded to: " + filePath);
-        } else {
-            System.out.println("File upload failed. Could not find file at: " + filePath);
-        }
         try (OutputStream outputStream = Files.newOutputStream(filePath)) {
-            System.out.println("+++++++++++++++++");
             inputStream.transferTo(outputStream);
-            System.out.println("++++++++po outputStream+++++++++");
         } catch (IOException e) {
-            //throw new RuntimeException("Cant save file siema pawel", e);
-            System.out.println("++++++++po ption(\"Cant save file siema pawel\", e);+++++++++");
+            throw new RuntimeException("Cant save file", e);
         }
-
         return newFileName;
     }
 
     public Resource serveFiles(String fileName) {
         FileSystemResourceLoader resourceLoader = new FileSystemResourceLoader();
-        return resourceLoader.getResource("/opt/app"+UPLOAD_DIR + fileName);
+        return resourceLoader.getResource(UPLOAD_DIR + fileName);
     }
 }
