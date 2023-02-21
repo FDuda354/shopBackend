@@ -23,5 +23,6 @@ public class OrderSummary {
     private OrderStatus status;
     private BigDecimal grossValue;
     private Payment payment;
+    private String redirectUrl;
 
 }

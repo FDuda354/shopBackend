@@ -1,5 +1,6 @@
 package pl.dudios.shopmvn.order.service.mapper;
 
+import liquibase.repackaged.org.apache.commons.lang3.RandomStringUtils;
 import pl.dudios.shopmvn.common.model.Basket;
 import pl.dudios.shopmvn.common.model.BasketItem;
 import pl.dudios.shopmvn.common.model.OrderStatus;
@@ -31,6 +32,7 @@ public class OrderMapper {
                 .grossValue(calcGrossValue(basket.getItems(), shipment))
                 .payment(payment)
                 .userId(userIdFromToken)
+                .orderHash(RandomStringUtils.randomAlphanumeric(12))
                 .build();
     }
 
@@ -41,13 +43,14 @@ public class OrderMapper {
                 .add(shipment.getPrice());
     }
 
-    public static OrderSummary createOrderSummary(Order newOrder) {
+    public static OrderSummary createOrderSummary(Order newOrder, String redirectUrl) {
         return OrderSummary.builder()
                 .id(newOrder.getId())
                 .placeDate(newOrder.getPlaceDate())
                 .status(newOrder.getOrderStatus())
                 .grossValue(newOrder.getGrossValue())
                 .payment(newOrder.getPayment())
+                .redirectUrl(redirectUrl)
                 .build();
     }
 

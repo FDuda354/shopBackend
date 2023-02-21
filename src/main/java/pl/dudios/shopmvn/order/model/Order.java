@@ -1,9 +1,6 @@
 package pl.dudios.shopmvn.order.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pl.dudios.shopmvn.common.model.OrderStatus;
 
 import javax.persistence.Entity;
@@ -21,6 +18,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -48,4 +46,5 @@ public class Order {
     @OneToOne
     private Payment payment;
     private Long userId;
+    private String orderHash;
 }

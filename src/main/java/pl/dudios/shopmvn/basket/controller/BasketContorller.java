@@ -11,6 +11,7 @@ import pl.dudios.shopmvn.basket.controller.dto.BasketSummaryDto;
 import pl.dudios.shopmvn.basket.controller.mapper.BasketMapper;
 import pl.dudios.shopmvn.basket.model.dto.BasketProductDto;
 import pl.dudios.shopmvn.basket.service.BasketService;
+import pl.dudios.shopmvn.common.model.Basket;
 
 import java.util.List;
 
@@ -23,7 +24,8 @@ public class BasketContorller {
 
     @GetMapping("/{id}")
     public BasketSummaryDto getBasket(@PathVariable Long id) {
-        return BasketMapper.mapToBasketSummaryDto(basketService.getBasket(id));
+        Basket basket = basketService.getBasket(id);
+        return BasketMapper.mapToBasketSummaryDto(basket);
     }
 
     @PutMapping("/{id}")

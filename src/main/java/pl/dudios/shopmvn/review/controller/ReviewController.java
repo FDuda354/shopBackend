@@ -26,7 +26,6 @@ public class ReviewController {
 
     @PostMapping("/review")
     public Review addReview(@RequestBody @Valid ReviewDto review, @AuthenticationPrincipal Long userId) {
-        System.out.println(userId);
         return reviewService.addReview(
                 Review.builder()
                         .authorName(cleanContent(review.authorName()))

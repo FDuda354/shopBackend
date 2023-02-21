@@ -17,6 +17,7 @@ public class BasketMapper {
     }
 
     public static BasketSummaryDto mapToBasketSummaryDto(Basket basket) {
+
         return BasketSummaryDto.builder()
                 .id(basket.getId())
                 .items(mapBasketItems(basket.getItems()))

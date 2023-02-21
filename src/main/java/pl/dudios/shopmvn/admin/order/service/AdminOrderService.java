@@ -50,17 +50,10 @@ public class AdminOrderService {
 
             OrderStatus oldStatus = order.getOrderStatus();
             OrderStatus newStatus = OrderStatus.valueOf(values.get("orderStatus"));
-            System.out.println("====================================");
-            System.out.println("oldStatus = " + oldStatus);
-            System.out.println("newStatus = " + newStatus);
-            System.out.println("===================order=================");
-
-            System.out.println(order);
             if (oldStatus == newStatus)
                 return;
 
             order.setOrderStatus(newStatus);
-            System.out.println("===================save=================");
             adminOrderRepo.save(order);
 
             logStatusChange(order.getId(), oldStatus, newStatus);

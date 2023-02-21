@@ -12,6 +12,7 @@ CREATE TABLE orders (
     zip_code varchar(10) NOT NULL,
     email varchar(60) NOT NULL,
     phone varchar(20) NOT NULL,
+    order_hash varchar(12),
     payment_id bigint,
     user_id bigint,
     CONSTRAINT fk_payment_id FOREIGN KEY (payment_id) REFERENCES payments(id),

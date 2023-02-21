@@ -21,7 +21,7 @@ public class BasketService {
     private final BasketRepo basketRepo;
     private final ProductRepo productRepo;
 
-    //TODO: Upgrade this 1
+    //TODO: Upgrade this 1 and add basketRepo.save(basket) if needed
     public Basket getBasket(Long id) {
         return basketRepo.findById(id).orElse(Basket.builder().created(LocalDateTime.now()).items(new ArrayList<>()).build());
     }

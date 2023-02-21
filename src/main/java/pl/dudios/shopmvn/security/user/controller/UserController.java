@@ -24,7 +24,6 @@ public class UserController {
 
     @GetMapping("/profile/{userId}/image")
     public UserProfileUpdate getProfileImage(@PathVariable Long userId) {
-        System.out.println(userId);
         return userService.getProfileImage(userId);
     }
 

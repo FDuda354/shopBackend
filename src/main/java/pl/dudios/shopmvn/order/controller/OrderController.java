@@ -1,11 +1,11 @@
 package pl.dudios.shopmvn.order.controller;
 
 import lombok.AllArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import pl.dudios.shopmvn.common.model.OrderStatus;
 import pl.dudios.shopmvn.order.model.dto.InitOrder;
 import pl.dudios.shopmvn.order.model.dto.OrderDto;
 import pl.dudios.shopmvn.order.model.dto.OrderDtoForUser;
@@ -13,11 +13,15 @@ import pl.dudios.shopmvn.order.model.dto.OrderSummary;
 import pl.dudios.shopmvn.order.service.OrderService;
 import pl.dudios.shopmvn.order.service.PaymentService;
 import pl.dudios.shopmvn.order.service.ShipmentService;
+import pl.dudios.shopmvn.order.service.payment.p24.dto.NotificationDto;
+import pl.dudios.shopmvn.order.service.payment.p24.dto.NotificationReceiveDto;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@Validated
 public class OrderController {
     private final OrderService orderService;
     private final ShipmentService shipmentService;
@@ -41,7 +45,20 @@ public class OrderController {
         if (userId == null) {
             throw new IllegalArgumentException("NULL user in getOrders");
         }
-        System.out.println(orderService.getOrdersFromUser(userId));
         return orderService.getOrdersFromUser(userId);
     }
+
+    @GetMapping("/order/notification/{orderHash}")
+    public NotificationDto P24NotificationShow(@PathVariable @Length(max = 12) String orderHash) {
+        return new NotificationDto(orderService.getOrderByOrderHash(orderHash).getOrderStatus().equals(OrderStatus.PAID));
+    }
+
+    @PostMapping("/order/notification/{orderHash}")
+    public String getP24Notification(@PathVariable @Length(max = 12) String orderHash,
+                                     @RequestBody NotificationReceiveDto receiveDto,
+                                     HttpServletRequest request) {
+        orderService.receiveNotification(orderHash, receiveDto, request.getRemoteAddr());
+        return orderHash;
+    }
+
 }
