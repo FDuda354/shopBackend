@@ -29,6 +29,7 @@ public class CategoryService {
     @Transactional(readOnly = true)
     public CategoryProductDto getCategoryWithProducts(String slug, Pageable pageable) {
         Category category = categoryRepo.findBySlug(slug);
+        System.out.println("Pageable: " + pageable.getPageSize());
         Page<Product> productPage = productRepo.findByCategoryId(category.getId(), pageable);
         List<ProductDto> productsDto = productPage.getContent().stream()
                 .map(product ->

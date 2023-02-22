@@ -15,7 +15,7 @@ public class DefaultErrorHandling {
 
     @ExceptionHandler({NoSuchElementException.class})
     @ResponseBody
-    public ResponseEntity<?>  handleNoSuchElementException(NoSuchElementException e, HttpServletRequest request) {
+    public ResponseEntity<?> handleNoSuchElementException(NoSuchElementException e, HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new DefaultErrorDto(
                         new Date(),

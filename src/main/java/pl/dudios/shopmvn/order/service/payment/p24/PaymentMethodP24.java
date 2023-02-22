@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import pl.dudios.shopmvn.order.model.Order;
 import pl.dudios.shopmvn.order.service.payment.p24.dto.NotificationReceiveDto;
-import reactor.core.publisher.Mono;
 
 import static pl.dudios.shopmvn.order.service.payment.p24.RequestUtil.*;
 
