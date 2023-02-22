@@ -6,6 +6,7 @@ import lombok.Getter;
 public class TransactionVerifyResponseDto {
 
     private Data data;
+
     record Data(String status) {
     }
 }

@@ -51,6 +51,9 @@ public class OrderService {
 
         String redirectUrl = initPaymentIfNeeded(newOrder);
 
+        if (redirectUrl == null)
+            newOrder.setOrderStatus(OrderStatus.NEW);
+
         return createOrderSummary(newOrder, redirectUrl);
     }
 
@@ -62,8 +65,13 @@ public class OrderService {
     }
 
     private void sendConfirmEmail(Order newOrder) {
-        emailClientService.getSender()
-                .sendEmail(newOrder.getEmail(), "Order confirmation", createEmailMessage(newOrder));
+        try {
+            emailClientService.getSender()
+                    .sendEmail(newOrder.getEmail(), "Order confirmation", createEmailMessage(newOrder));
+        } catch (Exception e) {
+            log.error("Error while sending email", e);
+        }
+
     }
 
     private void clearBasket(OrderDto orderDto) {

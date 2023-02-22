@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class TransactionVerifyRequestDto{
+public class TransactionVerifyRequestDto {
     private Integer merchantId;
     private Integer posId;
     private String sessionId;

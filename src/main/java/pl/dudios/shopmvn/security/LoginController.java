@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import pl.dudios.shopmvn.common.exception.RegisterException;
 import pl.dudios.shopmvn.security.user.model.AppUser;
 import pl.dudios.shopmvn.security.user.model.AppUserDetails;
 import pl.dudios.shopmvn.security.user.model.Role;
@@ -50,9 +51,9 @@ public class LoginController {
     @PostMapping("/register")
     public RoLResponse register(@RequestBody @Valid RegisterCredentials credentials) {
         if (!credentials.password().equals(credentials.confirmPassword()))
-            throw new IllegalArgumentException("Passwords do not match");
+            throw new RegisterException("Passwords do not match");
         if (userRepo.existsByUsername(credentials.username()))
-            throw new IllegalArgumentException("User already exists");
+            throw new RegisterException("User already exists");
 
         userRepo.save(AppUser.builder()
                 .username(credentials.username())
@@ -60,6 +61,7 @@ public class LoginController {
                 .enabled(true)
                 .authorities(List.of(Role.ROLE_USER))
                 .build());
+
         return auth(credentials.username(), credentials.password());
     }
 
