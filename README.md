@@ -11,7 +11,8 @@
 `shopBackend` is a backend service designed to manage and deliver data for an e-commerce platform. Primarily built using Java, it offers a robust set of features for handling product lists, user management, and order processing.
 
 ## Demo
-[![CleanShot 2023-08-13 at 14 29 13](https://github.com/FDuda354/shopBackend/assets/92389794/923a37ab-ff12-4778-9b64-b3a1d9bfeec5)](https://www.youtube.com/watch?v=-yxMNOpS0tY)
+https://www.youtube.com/watch?v=-yxMNOpS0tY
+![CleanShot 2023-08-13 at 14 29 13](https://github.com/FDuda354/shopBackend/assets/92389794/10c32c96-7bf1-457f-87d5-0724457596e1)
 
 ## Features
 
